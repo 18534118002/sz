@@ -33,7 +33,7 @@ public class AdminController {
         return "hello" ;
     }*/
     @Autowired
-    public SmsService smsService;
+    public SmsService smsService ;
 
     @Autowired
     public UserSuperService userSuperService;

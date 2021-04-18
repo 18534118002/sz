@@ -133,6 +133,8 @@
                 <input type="password" id="password2" placeholder="password" name="password">
                 <label for="password3" class="iconfont icon-lock"></label>
                 <input type="password" id="password3" placeholder="confirm password" name="password">
+                <label for="phone" class="iconfont icon-lock"></label>
+                <input type="password" id="phone" placeholder="telephone number" name="password">
             </div>
 
             <div th:if="${param.error}" style="
@@ -153,22 +155,39 @@
 <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/lib/layui/layui.js"></script>
 <script type="text/javascript">
+    document.getElementById('account2').onblur = function () {
+        var username =document.getElementById('account2').value;
+        if(null == username || "" === username) {
+            alert("请输入用户名");
+            return;
+        }
+    };
+    $("#register").click=(function () {
+        var username =document.getElementById('account2').value;
+        if(null == username || "" === username) {
+            alert("请输入用户名");
+            return;
+        }
+        var password2 =document.getElementById('password2').value;
+        if(null == password2 || "" === password2) {
+            alert("请输入密码");
+            return;
+        }
+        var password = /"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$"/i;
+        // console.log("=="+password.test("iFat3#"));
 
-    $(function () {
-
-
-        $('#smsCodeBtn').on('click', function () {
-
-            var telephone = $('.login-p').find('input[name="telephone"]').val();
-
-            /*var telephone = $('.login-form form').find('input[name="telephone"]').val(),
-                phonePattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
-            var n = telephone.search(phonePattern);
-            if (n < 0) {
-                layer.msg('请输入正确的手机号', {icon: 5, time: 2000});
+        var pwd =document.getElementById('password3').value;
+        if(null == pwd || "" === pwd) {
+            alert("请确定密码");
+            return;
+        }
+        function checkPhone() {
+            var phone = document.getElementById('phone').value;
+            if (!(/^1[3456789]d{9}$/.test(phone))) {
+                alert("手机号码有误，请重填");
                 return false;
             }
-            $(this).attr('readonly', 'readonly');*/
+        }
 
 
             $.ajax({
@@ -201,43 +220,6 @@
                 }
             });
         });
-
-
-        $('#submit-btn').on('click', function () {
-            var bind = $('.login-form .heading span.select').attr('data-bind');
-
-            if (bind === 'phone') {
-                var telephone = $('.login-form form').find('input[name="telephone"]').val(),
-                    phonePattern = /^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$/;
-                var n = telephone.search(phonePattern);
-                if (n < 0) {
-                    layer.msg('请输入正确的手机号', {icon: 5, time: 2000});
-                    return false;
-                }
-
-                var smsCode = $('.login-form form').find('input[name="smsCode"]').val();
-                if (smsCode.length !== 6) {
-                    layer.msg('请输入4位验证码', {icon: 5, time: 2000});
-                    return false;
-                }
-            } else {
-                var username = $('.login-form form').find('input[name="username"]').val();
-                if (username.length < 1) {
-                    layer.msg('请输入用户名/手机号', {icon: 5, time: 2000});
-                    return false;
-                }
-                var password = $('.login-form form').find('input[name="password"]').val();
-                if (password.length < 1) {
-                    layer.msg('请输入密码', {icon: 5, time: 2000});
-                    return false;
-                }
-
-            }
-            return true;
-        });
-
-
-    });
 
 
 </script>
