@@ -38,6 +38,8 @@ public interface  UserSuperService {
     //查询所有正常的UserSuper
     public List<UserSuper> findAllNormalUserSuper();
 
+    public String insertUserSuper(UserSuper userSuper);
+
 
 
 

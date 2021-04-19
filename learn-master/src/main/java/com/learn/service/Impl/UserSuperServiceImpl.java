@@ -103,4 +103,16 @@ public class UserSuperServiceImpl implements UserSuperService {
                 andEqualTo("status",UserSuperStatus.STATUS_YES.getValue());
         return userSuperMapper.selectByExample(userSuperExample);
     }
+
+    @Override
+    public String insertUserSuper(UserSuper userSuper) {
+        int i = userSuperMapper.insertSelective(userSuper);
+        String msg = "";
+        if (i > 0) {
+            return "success";
+        } else {
+            return "faild";
+        }
+    }
+
 }

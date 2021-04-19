@@ -231,6 +231,15 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory></directory>
+                <filtering></filtering>
+                <excludes>
+                    <exclude></exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
